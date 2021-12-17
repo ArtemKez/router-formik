@@ -1,18 +1,21 @@
 import {Link} from "react-router-dom";
 import React from "react";
-// import "./style.scss"
+import "./style.scss"
 import {Formik} from "formik";
+import Header from "../Header";
+import "./style.scss"
 
 export default function SignIn() {
+    const obj = {
+        text: "Sign Up",
+        to: "/signup"
+    }
     return (
         <>
-            <Link to="/" key={1}>Sign In</Link><br/>
-            <Link to="/signup" key={2}>signup</Link>
-            <div>SignIn</div>
-            <div>
-                <h1>Anywhere in your app!</h1>
-                <Formik
-                    initialValues={{ email: '', password: '' }}
+            <Header button={obj}/>
+            <div className={"divForm"}>
+                <h1>LOGIN TO YOUR ACCOUNT</h1>
+                <Formik initialValues={{ email: '', password: '' }}
                     validate={values => {
                         const errors = {};
                         if (!values.email) {
@@ -26,23 +29,14 @@ export default function SignIn() {
                     }}
                     onSubmit={(values, { setSubmitting }) => {
                         setTimeout(() => {
-                            alert(JSON.stringify(values, null, 2));
                             setSubmitting(false);
                         }, 400);
-                    }}
-                >
-                    {({
-                          values,
-                          errors,
-                          touched,
-                          handleChange,
-                          handleBlur,
-                          handleSubmit,
-                          isSubmitting,
-                          /* and other goodies */
-                      }) => (
-                        <form onSubmit={handleSubmit}>
+                    }}>
+                    {({values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting,}) => (
+                        <form className={"sign-in-form"} onSubmit={handleSubmit}>
                             <input
+                                placeholder={""}
+                                className={"input"}
                                 type="email"
                                 name="email"
                                 onChange={handleChange}
@@ -51,6 +45,8 @@ export default function SignIn() {
                             />
                             {errors.email && touched.email && errors.email}
                             <input
+                                placeholder={""}
+                                className={"input"}
                                 type="password"
                                 name="password"
                                 onChange={handleChange}
@@ -58,8 +54,8 @@ export default function SignIn() {
                                 value={values.password}
                             />
                             {errors.password && touched.password && errors.password}
-                            <button type="submit" disabled={isSubmitting}>
-                                Submit
+                            <button className={"login"} type="submit" disabled={isSubmitting}>
+                                LOGIN
                             </button>
                         </form>
                     )}

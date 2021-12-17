@@ -1,0 +1,43 @@
+body {
+  background-color: #3ea9f5;
+  color: white;
+}
+
+.divForm > * {
+  margin: 0 auto;
+  text-align: center;
+}
+
+form {
+  width: 600px;
+  & > .input:first-child {
+    margin-top: 20px;
+  }
+}
+
+
+.sign-in-form {
+  .login {
+    font-size: 20px;
+    font-weight: 400;
+    padding: 20px;
+    margin: 5px;
+    width: 100%;
+    background-color: #28d2d0;
+    color: white;
+    border: none;
+    border-radius: 5px;
+  }
+
+  .input {
+    box-sizing: border-box;
+    padding: 20px;
+    margin: 5px;
+    width: 100%;
+    background-color: white;
+    color: gray;
+    border: none;
+    border-radius: 5px;
+  }
+}
+

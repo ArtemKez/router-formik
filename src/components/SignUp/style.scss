@@ -1,0 +1,58 @@
+.divForm > * {
+  margin: 0 auto;
+  text-align: center;
+}
+
+form {
+  width: 600px;
+}
+
+.login {
+  font-size: 20px;
+  font-weight: 400;
+  padding: 20px;
+  margin: 5px;
+  width: 100%;
+  background-color: #28d2d0;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+form > div {
+  display: flex;
+}
+
+form > div:first-child {
+  margin-top: 20px;
+}
+
+.input {
+  box-sizing: border-box;
+  padding: 20px;
+  margin: 5px;
+  width: 50%;
+  background-color: white;
+  color: gray;
+  border: none;
+  border-radius: 5px;
+}
+
+.inputRadio {
+  margin: 20px;
+}
+
+.whiteBorder {
+  display: flex;
+  text-align: left;
+  margin: 20px 5px;
+  color: white;
+  background: none;
+  border: 1px solid white;
+  border-radius: 5px;
+}
+
+.radio-inputs {
+  display: block;
+  width: 100%;
+}

@@ -1,14 +1,39 @@
-import {Link} from "react-router-dom";
 import React from "react";
 import "./style.scss"
-import {Formik} from "formik";
+import {Formik, Form, Field} from "formik";
 import Header from "../Header";
+import * as Yup from "yup"
 
 export default function SignUp() {
     const obj = {
         text: "Sign In",
         to: "/"
     }
+    const SignInSchema = Yup.object().shape({
+        password: Yup.string()
+            .min(6, 'Too Short Password!')
+            .max(20, 'Too Long Password!')
+            .required('Please Feel In Password'),
+        passwordConfirmation: Yup.string()
+            .min(6, 'Too Short Password!')
+            .max(20, 'Too Long Password!')
+            .required('Please Feel In PasswordConfirmation'),
+        emailAddress: Yup.string()
+            .email('Invalid email')
+            .required('Please Feel In Email'),
+        firstName: Yup.string()
+            .min(6, 'Too Short Password!')
+            .max(20, 'Too Long Password!')
+            .required('Please Feel In FirstName'),
+        lastName: Yup.string()
+            .min(6, 'Too Short Password!')
+            .max(20, 'Too Long Password!')
+            .required('Please Feel In LastName'),
+        displayName: Yup.string()
+            .min(6, 'Too Short Password!')
+            .max(20, 'Too Long Password!')
+            .required('Please Feel In DisplayName'),
+    });
     return (
         <>
             <Header button={obj}/>
@@ -16,98 +41,102 @@ export default function SignUp() {
                 <h1>CREATE AN ACCOUNT</h1>
                 <p>We always keep your name and email address private.</p>
                 <Formik
-                    initialValues={{email: '', password: ''}}
-                    validate={values => {
-                        const errors = {};
-                        if (!values.email) {
-                            errors.email = 'Required';
-                        } else if (
-                            !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-                        ) {
-                            errors.email = 'Invalid email address';
-                        }
-                        return errors;
+                    initialValues={{
+                        password: '',
+                        firstName: '',
+                        lastName: '',
+                        displayName: '',
+                        emailAddress: '',
+                        passwordConfirmation: ''
                     }}
-                    onSubmit={(values, {setSubmitting}) => {
+                    onSubmit={async (values, {setSubmitting}) => {
+                        console.log(values)
                         setTimeout(() => {
                             setSubmitting(false);
                         }, 400);
-                    }}>
-                    {({values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting,}) => (
-                        <form onSubmit={handleSubmit}>
+                    }}
+                    validationSchema={SignInSchema}
+                >
+                    {({
+                          values,
+                          errors,
+                          touched,
+                          handleSubmit,
+                          isSubmitting,
+                      }) => (
+                        <Form className={"sign-in-form"} onSubmit={handleSubmit}>
                             <div>
-                                <input
-                                    placeholder={"firstName"}
-                                    className={"input"}
-                                    type="text"
-                                    name="firstName"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.firstName}
-                                />
-                                {errors.email && touched.email && errors.email}
-                                <input
-                                    placeholder={"lastName"}
-                                    className={"input"}
-                                    type="text"
-                                    name="lastName"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.lastName}
-                                />
-                                {errors.password && touched.password && errors.password}
+                                <div>
+                                    <Field
+                                        placeholder={"firstName"}
+                                        className={`input ${errors.firstName && touched.firstName && 'error'}`}
+                                        type="text"
+                                        name="firstName"
+                                        value={values.firstName}
+                                    />
+                                    {errors.firstName && touched.firstName && errors.firstName}
+                                </div>
+                                <div>
+                                    <Field
+                                        placeholder={"lastName"}
+                                        className={`input ${errors.lastName && touched.lastName && 'error'}`}
+                                        type="text"
+                                        name="lastName"
+                                        value={values.lastName}
+                                    />
+                                    {errors.lastName && touched.lastName && errors.lastName}
+                                </div>
                             </div>
                             <div>
-                                <input
-                                    placeholder={"displayName"}
-                                    className={"input"}
-                                    type="displayName"
-                                    name="displayName"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.email}
-                                />
-                                {errors.email && touched.email && errors.email}
-                                <input
-                                    placeholder={"emailAddress"}
-                                    className={"input"}
-                                    type="email"
-                                    name="emailAddress"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.password}
-                                />
-                                {errors.password && touched.password && errors.password}
+                                <div>
+                                    <Field
+                                        placeholder={"displayName"}
+                                        className={`input ${errors.displayName && touched.displayName && 'error'}`}
+                                        type="text"
+                                        name="displayName"
+                                        value={values.displayName}
+                                    />
+                                    {errors.displayName && touched.displayName && errors.displayName}
+                                </div>
+                                <div>
+                                    <Field
+                                        placeholder={"emailAddress"}
+                                        className={`input ${errors.email && touched.email && 'error'}`}
+                                        type="email"
+                                        name="emailAddress"
+                                        value={values.emailAddress}
+                                    />
+                                    {errors.email && touched.email && errors.email}
+                                </div>
                             </div>
                             <div>
-                                <input
-                                    placeholder={"password"}
-                                    className={"input"}
-                                    type="password"
-                                    name="password"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.email}
-                                />
-                                {errors.email && touched.email && errors.email}
-                                <input
-                                    placeholder={"passwordConfirmation"}
-                                    className={"input"}
-                                    type="password"
-                                    name="passwordConfirmation"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.password}
-                                />
-                                {errors.password && touched.password && errors.password}
+                                <div>
+                                    <Field
+                                        placeholder={"password"}
+                                        className={`input ${errors.password && touched.password && 'error'}`}
+                                        type="password"
+                                        name="password"
+                                        value={values.password}
+                                    />
+                                    {errors.password && touched.password && errors.password}
+                                </div>
+                                <div>
+                                    <Field
+                                        placeholder={"passwordConfirmation"}
+                                        className={`input ${errors.password && touched.password && 'error'}`}
+                                        type="password"
+                                        name="passwordConfirmation"
+                                        value={values.passwordConfirmation}
+                                    />
+                                    {errors.password && touched.password && errors.password}
+                                </div>
                             </div>
                             <div className={"radio-inputs"}>
                                 <div className={"whiteBorder"}>
-                                    <input
+                                    <Field
                                         className={"inputRadio"}
                                         type="radio"
                                         name="radio1"
-                                        onChange={handleChange}
                                     />
                                     <div>
                                         <h2>Join As a Buyer</h2>
@@ -115,13 +144,11 @@ export default function SignUp() {
                                             product.</p>
                                     </div>
                                 </div>
-                                {errors.email && touched.email && errors.email}
                                 <div className={"whiteBorder"}>
-                                    <input
+                                    <Field
                                         className={"inputRadio"}
                                         type="radio"
                                         name="radio2"
-                                        onChange={handleChange}
                                     />
                                     <div>
                                         <h2>Join As a Creative or Marketplace Seller</h2>
@@ -129,12 +156,11 @@ export default function SignUp() {
                                             Marketplace.</p>
                                     </div>
                                 </div>
-                                {errors.password && touched.password && errors.password}
                             </div>
                             <button className={"login"} type="submit" disabled={isSubmitting}>
                                 Create account
                             </button>
-                        </form>
+                        </Form>
                     )}
                 </Formik>
             </div>

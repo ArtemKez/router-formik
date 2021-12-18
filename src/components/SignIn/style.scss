@@ -10,6 +10,7 @@ body {
 
 form {
   width: 600px;
+
   & > .input:first-child {
     margin-top: 20px;
   }
@@ -27,6 +28,9 @@ form {
     color: white;
     border: none;
     border-radius: 5px;
+    &:disabled {
+      background-color: #9fcecd;
+    }
   }
 
   .input {
@@ -38,6 +42,22 @@ form {
     color: gray;
     border: none;
     border-radius: 5px;
+
+    &.error {
+      border: 1px solid red;
+    }
+
+    &:focus-visible{
+      outline: none;
+    }
+  }
+
+  .error_message {
+    color: red;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    font-size: 14px;
   }
 }
 

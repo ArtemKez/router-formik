@@ -7,16 +7,48 @@ form {
   width: 600px;
 }
 
-.login {
-  font-size: 20px;
-  font-weight: 400;
-  padding: 20px;
-  margin: 5px;
-  width: 100%;
-  background-color: #28d2d0;
-  color: white;
-  border: none;
-  border-radius: 5px;
+.sign-in-form {
+  .login {
+    font-size: 20px;
+    font-weight: 400;
+    padding: 20px;
+    margin: 5px;
+    width: 100%;
+    background-color: #28d2d0;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    &:disabled {
+      background-color: #9fcecd;
+    }
+  }
+
+  .input {
+    box-sizing: border-box;
+    padding: 20px;
+    margin: 5px;
+    width: 100%;
+    background-color: white;
+    color: gray;
+    border: none;
+    border-radius: 5px;
+
+    &.error {
+      border: 1px solid red;
+    }
+
+    &:focus-visible{
+      outline: none;
+    }
+  }
+
+  .error_message {
+    color: red;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    font-size: 14px;
+  }
 }
 
 form > div {
@@ -27,16 +59,12 @@ form > div:first-child {
   margin-top: 20px;
 }
 
-.input {
-  box-sizing: border-box;
-  padding: 20px;
-  margin: 5px;
-  width: 50%;
-  background-color: white;
-  color: gray;
-  border: none;
-  border-radius: 5px;
+form > div > div {
+  display: flex;
+  flex-direction: column;
 }
+
+
 
 .inputRadio {
   margin: 20px;

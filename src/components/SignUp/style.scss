@@ -5,9 +5,37 @@
 
 form {
   width: 600px;
+
+  & > div {
+    display: flex;
+
+    &:first-child {
+      margin-top: 20px;
+    }
+
+    & > div {
+      display: flex;
+      flex-direction: column;
+      width: 50%;
+      margin: 0 10px;
+    }
+
+    & > .whiteBorder {
+      width: 100%;
+      flex-direction: row;
+    }
+  }
 }
 
-.sign-in-form {
+.sign-up-form {
+  .radio-inputs {
+    box-sizing: border-box;
+    padding: 0 10px ;
+    &.error{
+      border: 1px solid red;
+      border-radius: 10px;
+    }
+  }
   .login {
     font-size: 20px;
     font-weight: 400;
@@ -18,6 +46,7 @@ form {
     color: white;
     border: none;
     border-radius: 5px;
+
     &:disabled {
       background-color: #9fcecd;
     }
@@ -37,7 +66,7 @@ form {
       border: 1px solid red;
     }
 
-    &:focus-visible{
+    &:focus-visible {
       outline: none;
     }
   }
@@ -51,20 +80,6 @@ form {
   }
 }
 
-form > div {
-  display: flex;
-}
-
-form > div:first-child {
-  margin-top: 20px;
-}
-
-form > div > div {
-  display: flex;
-  flex-direction: column;
-}
-
-
 
 .inputRadio {
   margin: 20px;
@@ -73,7 +88,7 @@ form > div > div {
 .whiteBorder {
   display: flex;
   text-align: left;
-  margin: 20px 5px;
+  margin: 20px 0;
   color: white;
   background: none;
   border: 1px solid white;
